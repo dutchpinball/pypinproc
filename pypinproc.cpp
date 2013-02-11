@@ -674,7 +674,7 @@ PinPROC_aux_send_commands(pinproc_PinPROCObject *self, PyObject *args, PyObject 
 		}
 	}
 
-	fprintf(stderr, "\n\nSending Aux Commands: numCommands:%d, addr:%d\n\n", numCommands, address);
+	//fprintf(stderr, "\n\nSending Aux Commands: numCommands:%d, addr:%d\n\n", numCommands, address);
 	
 	if (PRDriverAuxSendCommands(self->handle, commands, numCommands, address) == kPRSuccess)
 	{
@@ -736,7 +736,7 @@ PinPROC_get_events(pinproc_PinPROCObject *self, PyObject *args)
 {
 	PyObject *list = PyList_New(0);
 	
-	const int maxEvents = 16;
+	const int maxEvents = 2048;
 	PREvent events[maxEvents];
 	int numEvents = PRGetEvents(self->handle, events, maxEvents);
 	if (numEvents < 0)
