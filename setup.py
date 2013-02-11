@@ -18,8 +18,8 @@ if 'ARCH' in os.environ:
 
 module1 = Extension("pinproc",
 					include_dirs = ['../libpinproc/include'],
-					libraries = ['usb', 'ftdi', 'pinproc'],
-					library_dirs = ['/usr/local/lib', '../libpinproc/bin'],
+					libraries = ['pinproc', 'ftd2xx'],
+					library_dirs = ['../libpinproc/bin', 'C:/Program Files/MinGW/lib'],
 					extra_compile_args = extra_compile_args,
 					extra_link_args = extra_link_args,
 					sources = ['pypinproc.cpp', 'dmdutil.cpp', 'dmd.c'])
