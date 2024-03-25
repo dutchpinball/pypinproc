@@ -1439,21 +1439,7 @@ extern "C" {
         if (!PyArg_ParseTupleAndKeywords(args, kwds, "iii", kwlist, &data, &extra_data, &delay_time))
             return NULL;
         PRDriverAuxCommand auxCommand;
-        if (self->machineType == kPRMachineWPCAlphanumeric) {
-            PRDriverAuxPrepareOutput(&auxCommand, data, extra_data, 8, 0, delay_time);
-        }
-        else if (self->machineType == kPRMachineSternWhitestar || self->machineType == kPRMachineSternSAM) {
-            PRDriverAuxPrepareOutput(&auxCommand, data, 0, 6, 1, delay_time);
-        }
-        else if (self->machineType == kPRMachinePDB) {
-            // If you're using the P3-ROC aux port for a single device, you don't need to specify enables/muxEnables.
-            // If you're using a P-ROC and/or want to specify enables/muxEnables, use pinproc_aux_command_output_custom instead.
-            PRDriverAuxPrepareOutput(&auxCommand, data, 0, 0, 0, delay_time);
-        }
-        else {
-            fprintf(stderr, "PreparingAuxOutput Unknown machineType");
-            return NULL;
-        }
+        PRDriverAuxPrepareOutput(&auxCommand, data, 0, 0, 0, delay_time);
         return PyDictFromAuxCommand(&auxCommand);
     }
 
@@ -1465,10 +1451,7 @@ extern "C" {
         if (!PyArg_ParseTupleAndKeywords(args, kwds, "iii", kwlist, &data, &extra_data, &delay_time))
             return NULL;
         PRDriverAuxCommand auxCommand;
-        if (self->machineType == kPRMachineSternWhitestar || self->machineType == kPRMachineSternSAM) {
-            PRDriverAuxPrepareOutput(&auxCommand, data, 0, 11, 1, delay_time);
-        }
-        else return NULL;
+        PRDriverAuxPrepareOutput(&auxCommand, data, 0, 11, 1, delay_time);
         return PyDictFromAuxCommand(&auxCommand);
     }
 
