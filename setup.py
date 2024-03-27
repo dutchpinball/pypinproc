@@ -3,7 +3,6 @@ from setuptools import setup, Extension
 from subprocess import check_output, CalledProcessError, STDOUT
 
 extra_compile_args = ['-O0', '-g']
-extra_compile_args.append('-Wno-write-strings')  # fix "warning: deprecated conversion from string constant to 'char*'"
 extra_link_args = []
 
 # To use the ARCH flag simply:
@@ -42,8 +41,14 @@ def pkgconfig(package, kw):
     return kw
 
 kw = {}
-for library in libraries:
-    kw = pkgconfig(library, kw)
+try:
+    for library in libraries:
+        kw = pkgconfig(library, kw)
+except Exception as e:
+    if os.name == 'nt':
+        kw['include_dirs'] = [r'C:\Program Files\P-ROC\libpinproc\include\p-roc']
+        kw['library_dirs'] = [r'C:\Program Files\P-ROC\libpinproc\lib']
+        kw['libraries'] = ['pinproc']
 
 
 module1 = Extension("pinproc",
