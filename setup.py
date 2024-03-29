@@ -2,7 +2,7 @@
 from setuptools import setup, Extension
 from subprocess import check_output, CalledProcessError, STDOUT
 
-extra_compile_args = ['-O0', '-g']
+extra_compile_args = []
 extra_link_args = []
 
 # To use the ARCH flag simply:
