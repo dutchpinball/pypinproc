@@ -1,0 +1,13 @@
+name: Install libpinproc
+runs:
+  using: composite
+  steps:
+  - name: Download latest libpinproc MSI
+    uses: robinraju/release-downloader@v1.9
+    with:
+      repository: dutchpinball/libpinproc
+      latest: true
+      fileName: "*.msi"
+  - name: Install the MSI
+    run: for %%i in (libpinproc-*.msi) do msiexec /i %%i /quiet
+    shell: cmd
