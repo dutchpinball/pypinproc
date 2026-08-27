@@ -16,7 +16,7 @@ if os.name == 'nt':
     libraries = ['pinproc', 'libftd2xx']
 else:
     # Linux
-    libraries = ['libusb', 'libftdi1', 'pinproc']
+    libraries = ['libusb-1.0', 'libftdi1', 'pinproc']
 
 def getstatusoutput(cmd):
     try:
@@ -49,6 +49,8 @@ except Exception as e:
         kw['include_dirs'] = [r'C:\Program Files\P-ROC\libpinproc\include\p-roc']
         kw['library_dirs'] = [r'C:\Program Files\P-ROC\libpinproc\lib']
         kw['libraries'] = ['pinproc']
+    else:
+        raise
 
 
 module1 = Extension("pinproc",
